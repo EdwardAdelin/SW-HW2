@@ -1,0 +1,46 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:ex="http://example.org/bookrec#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <ex:Book rdf:about="http://example.org/bookrec#HarryPotter">
+    <ex:suitableFor>
+      <ex:ReadingLevel rdf:about="http://example.org/bookrec#Beginner"/>
+    </ex:suitableFor>
+    <ex:hasTheme>
+      <ex:Theme rdf:about="http://example.org/bookrec#Fantasy"/>
+    </ex:hasTheme>
+  </ex:Book>
+  <ex:Book rdf:about="http://example.org/bookrec#TheSilentPatient">
+    <ex:suitableFor>
+      <ex:ReadingLevel rdf:about="http://example.org/bookrec#Intermediate"/>
+    </ex:suitableFor>
+    <ex:hasTheme>
+      <ex:Theme rdf:about="http://example.org/bookrec#Murder"/>
+    </ex:hasTheme>
+    <ex:hasTheme>
+      <ex:Theme rdf:about="http://example.org/bookrec#Mystery"/>
+    </ex:hasTheme>
+  </ex:Book>
+  <ex:User rdf:about="http://example.org/bookrec#Alice">
+    <ex:prefersTheme>
+      <ex:Theme rdf:about="http://example.org/bookrec#ScienceFiction"/>
+    </ex:prefersTheme>
+    <ex:hasReadingLevel rdf:resource="http://example.org/bookrec#Intermediate"/>
+  </ex:User>
+  <ex:Book rdf:about="http://example.org/bookrec#Dune">
+    <ex:suitableFor>
+      <ex:ReadingLevel rdf:about="http://example.org/bookrec#Advanced"/>
+    </ex:suitableFor>
+    <ex:hasTheme rdf:resource="http://example.org/bookrec#Fantasy"/>
+    <ex:hasTheme rdf:resource="http://example.org/bookrec#ScienceFiction"/>
+  </ex:Book>
+  <ex:Book rdf:about="http://example.org/bookrec#HungerGames">
+    <ex:suitableFor rdf:resource="http://example.org/bookrec#Beginner"/>
+    <ex:hasTheme rdf:resource="http://example.org/bookrec#Fantasy"/>
+    <ex:hasTheme rdf:resource="http://example.org/bookrec#ScienceFiction"/>
+  </ex:Book>
+  <ex:User rdf:about="http://example.org/bookrec#Bob">
+    <ex:prefersTheme rdf:resource="http://example.org/bookrec#Mystery"/>
+    <ex:hasReadingLevel rdf:resource="http://example.org/bookrec#Beginner"/>
+  </ex:User>
+</rdf:RDF>
