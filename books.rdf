@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF 
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:ex="http://example.org/bookrec#">
+
+    <!-- Definitions of Reading Levels -->
+    <rdf:Description rdf:about="http://example.org/bookrec#Beginner">
+        <rdf:type rdf:resource="http://example.org/bookrec#ReadingLevel"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://example.org/bookrec#Intermediate">
+        <rdf:type rdf:resource="http://example.org/bookrec#ReadingLevel"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://example.org/bookrec#Advanced">
+        <rdf:type rdf:resource="http://example.org/bookrec#ReadingLevel"/>
+    </rdf:Description>
+
+    <!-- Definitions of Themes -->
+    <rdf:Description rdf:about="http://example.org/bookrec#ScienceFiction">
+        <rdf:type rdf:resource="http://example.org/bookrec#Theme"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://example.org/bookrec#Fantasy">
+        <rdf:type rdf:resource="http://example.org/bookrec#Theme"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://example.org/bookrec#Mystery">
+        <rdf:type rdf:resource="http://example.org/bookrec#Theme"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://example.org/bookrec#Murder">
+        <rdf:type rdf:resource="http://example.org/bookrec#Theme"/>
+    </rdf:Description>
+
+    <!-- USERS -->
+    <!-- Alice: Intermediate, prefers Science Fiction -->
+    <rdf:Description rdf:about="http://example.org/bookrec#Alice">
+        <rdf:type rdf:resource="http://example.org/bookrec#User"/>
+        <ex:hasReadingLevel rdf:resource="http://example.org/bookrec#Intermediate"/>
+        <ex:prefersTheme rdf:resource="http://example.org/bookrec#ScienceFiction"/>
+    </rdf:Description>
+
+    <!-- Bob: Beginner, prefers Mystery -->
+    <rdf:Description rdf:about="http://example.org/bookrec#Bob">
+        <rdf:type rdf:resource="http://example.org/bookrec#User"/>
+        <ex:hasReadingLevel rdf:resource="http://example.org/bookrec#Beginner"/>
+        <ex:prefersTheme rdf:resource="http://example.org/bookrec#Mystery"/>
+    </rdf:Description>
+
+    <!-- BOOKS -->
+    <!-- Dune: Sci-Fi, Fantasy, Advanced -->
+    <rdf:Description rdf:about="http://example.org/bookrec#Dune">
+        <rdf:type rdf:resource="http://example.org/bookrec#Book"/>
+        <ex:hasTheme rdf:resource="http://example.org/bookrec#ScienceFiction"/>
+        <ex:hasTheme rdf:resource="http://example.org/bookrec#Fantasy"/>
+        <ex:suitableFor rdf:resource="http://example.org/bookrec#Advanced"/>
+    </rdf:Description>
+
+    <!-- The Silent Patient: Mystery, Murder, Intermediate -->
+    <rdf:Description rdf:about="http://example.org/bookrec#TheSilentPatient">
+        <rdf:type rdf:resource="http://example.org/bookrec#Book"/>
+        <ex:hasTheme rdf:resource="http://example.org/bookrec#Mystery"/>
+        <ex:hasTheme rdf:resource="http://example.org/bookrec#Murder"/>
+        <ex:suitableFor rdf:resource="http://example.org/bookrec#Intermediate"/>
+    </rdf:Description>
+
+    <!-- Hunger Games: Sci-Fi, Fantasy, Beginner -->
+    <rdf:Description rdf:about="http://example.org/bookrec#HungerGames">
+        <rdf:type rdf:resource="http://example.org/bookrec#Book"/>
+        <ex:hasTheme rdf:resource="http://example.org/bookrec#ScienceFiction"/>
+        <ex:hasTheme rdf:resource="http://example.org/bookrec#Fantasy"/>
+        <ex:suitableFor rdf:resource="http://example.org/bookrec#Beginner"/>
+    </rdf:Description>
+
+</rdf:RDF>
