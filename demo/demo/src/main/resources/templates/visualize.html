@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RDF Graph Visualizer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Include Vis.js Network Library -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightgray;
+            background-color: #f8f9fa;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1>RDF Graph Visualizer</h1>
+    <a href="/" class="btn btn-secondary">Back to Home</a>
+</div>
+
+<p class="text-muted">Upload an RDF/XML file to visualize its knowledge graph.</p>
+
+<!-- Upload Form -->
+<div class="card p-3">
+    <form id="uploadForm">
+        <div class="input-group">
+            <input type="file" class="form-control" id="rdfFile" accept=".rdf,.xml" required>
+            <button class="btn btn-primary" type="submit">Upload and Draw</button>
+        </div>
+    </form>
+</div>
+
+<!-- The container where the graph will be drawn -->
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent standard page reload
+
+        const fileInput = document.getElementById('rdfFile');
+        if (fileInput.files.length === 0) return;
+
+        // Prepare the file to be sent to Java Controller
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        // Send via AJAX to the Spring Boot backend
+        fetch('/api/upload-rdf', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            drawGraph(data.nodes, data.edges);
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    function drawGraph(nodesData, edgesData) {
+        // Provide the data to Vis.js
+        var data = {
+            nodes: new vis.DataSet(nodesData),
+            edges: new vis.DataSet(edgesData)
+        };
+
+        // Configure visual options
+        var options = {
+            physics: {
+                barnesHut: {
+                    gravitationalConstant: -3000,
+                    springLength: 200
+                }
+            },
+            edges: {
+                font: { align: 'middle' },
+                color: { color: '#848484' }
+            }
+        };
+
+        // Draw the network in the #mynetwork div
+        var container = document.getElementById('mynetwork');
+        var network = new vis.Network(container, data, options);
+    }
+</script>
+</body>
+</html>
