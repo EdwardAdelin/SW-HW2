@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class JenaService {
@@ -114,5 +113,97 @@ public class JenaService {
     // Getter for the model (we will need this for the graph visualization later)
     public Model getModel() {
         return model;
+    }
+
+    public Map<String, List<String>> getBookDetails(String bookLocalName) {
+        Map<String, List<String>> details = new HashMap<>();
+        String bookUri = NS + bookLocalName;
+
+        // Query for all properties of this specific book
+        String queryString =
+                "PREFIX ex: <" + NS + "> " +
+                        "SELECT ?p ?o WHERE { <" + bookUri + "> ?p ?o . }";
+
+        Query query = QueryFactory.create(queryString);
+        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
+            ResultSet results = qexec.execSelect();
+            while (results.hasNext()) {
+                QuerySolution soln = results.nextSolution();
+                String property = soln.getResource("p").getLocalName();
+                String value = soln.get("o").isResource() ?
+                        soln.getResource("o").getLocalName() :
+                        soln.get("o").toString();
+
+                details.computeIfAbsent(property, k -> new ArrayList<>()).add(value);
+            }
+        }
+        return details;
+    }
+
+    public Map<String, Object> getGraphData() {
+        List<Map<String, String>> nodes = new ArrayList<>();
+        List<Map<String, String>> edges = new ArrayList<>();
+        Set<String> seenNodes = new HashSet<>();
+
+        StmtIterator it = model.listStatements();
+        while (it.hasNext()) {
+            Statement stmt = it.nextStatement();
+            String s = stmt.getSubject().getLocalName();
+            String p = stmt.getPredicate().getLocalName();
+            String o = stmt.getObject().isResource() ? stmt.getObject().asResource().getLocalName() : stmt.getObject().toString();
+
+            if (seenNodes.add(s)) nodes.add(Map.of("id", s, "label", s));
+            if (stmt.getObject().isResource() && seenNodes.add(o)) nodes.add(Map.of("id", o, "label", o));
+
+            edges.add(Map.of("from", s, "to", o, "label", p));
+        }
+        return Map.of("nodes", nodes, "edges", edges);
+    }
+
+    /**
+     * Task 2: Parse an uploaded RDF file and return Nodes and Edges for Vis.js
+     */
+    public Map<String, Object> parseAndGetGraphData(org.springframework.web.multipart.MultipartFile file) {
+        Model tempModel = ModelFactory.createDefaultModel();
+        List<Map<String, String>> nodes = new ArrayList<>();
+        List<Map<String, String>> edges = new ArrayList<>();
+        java.util.Set<String> seenNodes = new java.util.HashSet<>();
+
+        try (java.io.InputStream in = file.getInputStream()) {
+            // Read the uploaded file into a temporary Jena model
+            tempModel.read(in, null);
+
+            StmtIterator it = tempModel.listStatements();
+            while (it.hasNext()) {
+                Statement stmt = it.nextStatement();
+
+                // Extract Subject, Predicate, Object
+                String s = stmt.getSubject().isURIResource() ? stmt.getSubject().getLocalName() : stmt.getSubject().toString();
+                String p = stmt.getPredicate().getLocalName();
+                String o = stmt.getObject().isResource() ? stmt.getObject().asResource().getLocalName() : stmt.getObject().toString();
+
+                // Add Subject Node
+                if (seenNodes.add(s)) {
+                    nodes.add(Map.of("id", s, "label", s, "color", "#97C2FC"));
+                }
+
+                // Add Object Node (make literals a different color)
+                if (seenNodes.add(o)) {
+                    if (stmt.getObject().isLiteral()) {
+                        nodes.add(Map.of("id", o, "label", o, "shape", "box", "color", "#E2E2E2"));
+                    } else {
+                        nodes.add(Map.of("id", o, "label", o, "color", "#FB7E81"));
+                    }
+                }
+
+                // Add Edge connecting them
+                edges.add(Map.of("from", s, "to", o, "label", p, "arrows", "to"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Map.of("error", "Failed to parse RDF file.");
+        }
+
+        return Map.of("nodes", nodes, "edges", edges);
     }
 }
