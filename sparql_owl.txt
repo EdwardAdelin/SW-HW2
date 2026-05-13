@@ -1,0 +1,43 @@
+### 1. List all books and their respective reading levels
+PREFIX ex: <http://example.org/ontology/bookrec#>
+SELECT ?bookName ?level
+WHERE {
+  ?book rdf:type ex:Book .
+  ?book ex:suitableFor ?level .
+  BIND(REPLACE(STR(?book), "^.*#", "") AS ?bookName)
+}
+
+### 2. Find all themes associated with the book "Dune"
+PREFIX ex: <http://example.org/ontology/bookrec#>
+SELECT ?theme
+WHERE {
+  ex:Dune ex:hasTheme ?theme .
+}
+
+### 3. Recommendation Logic: Find books for Alice 
+### (Books that match HER preferred theme AND HER reading level)
+PREFIX ex: <http://example.org/ontology/bookrec#>
+SELECT ?recommendedBook
+WHERE {
+  ex:Alice ex:prefersTheme ?theme .
+  ex:Alice ex:hasReadingLevel ?level .
+  ?book rdf:type ex:Book .
+  ?book ex:hasTheme ?theme .
+  ?book ex:suitableFor ?level .
+  BIND(REPLACE(STR(?book), "^.*#", "") AS ?recommendedBook)
+}
+
+### 4. Find all users who prefer the "Mystery" theme
+PREFIX ex: <http://example.org/ontology/bookrec#>
+SELECT ?user
+WHERE {
+  ?user ex:prefersTheme ex:Mystery .
+}
+
+### 5. Count how many books are available for each reading level
+PREFIX ex: <http://example.org/ontology/bookrec#>
+SELECT ?level (COUNT(?book) AS ?bookCount)
+WHERE {
+  ?book ex:suitableFor ?level .
+}
+GROUP BY ?level
