@@ -1,92 +1,79 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://example.org/ontology/bookrec#"
-     xml:base="http://example.org/ontology/bookrec"
-     xmlns:book="http://example.org/ontology/bookrec#"
+<rdf:RDF xmlns="http://www.semanticweb.org/homework/bookrec#"
+     xml:base="http://www.semanticweb.org/homework/bookrec"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    
+    <owl:Ontology rdf:about="http://www.semanticweb.org/homework/bookrec"/>
 
-    <owl:Ontology rdf:about="http://example.org/ontology/bookrec"/>
+    <!-- Properties -->
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/homework/bookrec#hasTheme"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/homework/bookrec#suitableFor"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/homework/bookrec#prefersTheme"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/homework/bookrec#hasReadingLevel"/>
 
-    <!-- ========================================================= -->
-    <!-- Object Properties -->
-    <!-- ========================================================= -->
-    <owl:ObjectProperty rdf:about="http://example.org/ontology/bookrec#hasReadingLevel"/>
-    <owl:ObjectProperty rdf:about="http://example.org/ontology/bookrec#hasTheme"/>
-    <owl:ObjectProperty rdf:about="http://example.org/ontology/bookrec#prefersTheme"/>
-    <owl:ObjectProperty rdf:about="http://example.org/ontology/bookrec#suitableFor"/>
-
-    <!-- ========================================================= -->
     <!-- Classes -->
-    <!-- ========================================================= -->
-    <owl:Class rdf:about="http://example.org/ontology/bookrec#Book"/>
-    <owl:Class rdf:about="http://example.org/ontology/bookrec#ReadingLevel"/>
-    <owl:Class rdf:about="http://example.org/ontology/bookrec#Theme"/>
-    <owl:Class rdf:about="http://example.org/ontology/bookrec#User"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/homework/bookrec#Book"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/homework/bookrec#Theme"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/homework/bookrec#User"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/homework/bookrec#ReadingLevel"/>
 
-    <!-- ========================================================= -->
-    <!-- Individuals -->
-    <!-- ========================================================= -->
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Advanced">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#ReadingLevel"/>
+    <!-- Reading Levels -->
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Advanced">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#ReadingLevel"/>
     </owl:NamedIndividual>
-    
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Beginner">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#ReadingLevel"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Beginner">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#ReadingLevel"/>
     </owl:NamedIndividual>
-    
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Intermediate">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#ReadingLevel"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Intermediate">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#ReadingLevel"/>
     </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Fantasy">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Theme"/>
+    <!-- Themes -->
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Fantasy">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Theme"/>
     </owl:NamedIndividual>
-    
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Murder">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Theme"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Mystery">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Theme"/>
     </owl:NamedIndividual>
-    
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Mystery">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Theme"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#ScienceFiction">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Theme"/>
     </owl:NamedIndividual>
-    
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#ScienceFiction">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Theme"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Murder">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Theme"/>
     </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Alice">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#User"/>
-        <book:hasReadingLevel rdf:resource="http://example.org/ontology/bookrec#Intermediate"/>
-        <book:prefersTheme rdf:resource="http://example.org/ontology/bookrec#ScienceFiction"/>
+    <!-- Users -->
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Alice">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#User"/>
+        <prefersTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#ScienceFiction"/>
+        <hasReadingLevel rdf:resource="http://www.semanticweb.org/homework/bookrec#Intermediate"/>
+    </owl:NamedIndividual>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Bob">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#User"/>
+        <prefersTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#Mystery"/>
+        <hasReadingLevel rdf:resource="http://www.semanticweb.org/homework/bookrec#Beginner"/>
     </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Bob">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#User"/>
-        <book:hasReadingLevel rdf:resource="http://example.org/ontology/bookrec#Beginner"/>
-        <book:prefersTheme rdf:resource="http://example.org/ontology/bookrec#Mystery"/>
+    <!-- Books -->
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#Dune">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Book"/>
+        <hasTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#Fantasy"/>
+        <hasTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#ScienceFiction"/>
+        <suitableFor rdf:resource="http://www.semanticweb.org/homework/bookrec#Advanced"/>
     </owl:NamedIndividual>
-
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#Dune">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Book"/>
-        <book:hasTheme rdf:resource="http://example.org/ontology/bookrec#Fantasy"/>
-        <book:hasTheme rdf:resource="http://example.org/ontology/bookrec#ScienceFiction"/>
-        <book:suitableFor rdf:resource="http://example.org/ontology/bookrec#Advanced"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#HungerGames">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Book"/>
+        <hasTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#Fantasy"/>
+        <hasTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#ScienceFiction"/>
+        <suitableFor rdf:resource="http://www.semanticweb.org/homework/bookrec#Beginner"/>
     </owl:NamedIndividual>
-
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#HungerGames">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Book"/>
-        <book:hasTheme rdf:resource="http://example.org/ontology/bookrec#Fantasy"/>
-        <book:hasTheme rdf:resource="http://example.org/ontology/bookrec#ScienceFiction"/>
-        <book:suitableFor rdf:resource="http://example.org/ontology/bookrec#Beginner"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/homework/bookrec#TheSilentPatient">
+        <rdf:type rdf:resource="http://www.semanticweb.org/homework/bookrec#Book"/>
+        <hasTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#Mystery"/>
+        <hasTheme rdf:resource="http://www.semanticweb.org/homework/bookrec#Murder"/>
+        <suitableFor rdf:resource="http://www.semanticweb.org/homework/bookrec#Intermediate"/>
     </owl:NamedIndividual>
-
-    <owl:NamedIndividual rdf:about="http://example.org/ontology/bookrec#TheSilentPatient">
-        <rdf:type rdf:resource="http://example.org/ontology/bookrec#Book"/>
-        <book:hasTheme rdf:resource="http://example.org/ontology/bookrec#Murder"/>
-        <book:hasTheme rdf:resource="http://example.org/ontology/bookrec#Mystery"/>
-        <book:suitableFor rdf:resource="http://example.org/ontology/bookrec#Intermediate"/>
-    </owl:NamedIndividual>
-
 </rdf:RDF>

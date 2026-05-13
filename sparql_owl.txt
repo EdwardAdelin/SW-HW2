@@ -1,43 +1,41 @@
-### 1. List all books and their respective reading levels
-PREFIX ex: <http://example.org/ontology/bookrec#>
-SELECT ?bookName ?level
+### 1. List all books and their reading levels
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX book: <http://www.semanticweb.org/homework/bookrec#>
+SELECT ?book ?level
 WHERE {
-  ?book rdf:type ex:Book .
-  ?book ex:suitableFor ?level .
-  BIND(REPLACE(STR(?book), "^.*#", "") AS ?bookName)
+  ?book rdf:type book:Book .
+  ?book book:suitableFor ?level .
 }
 
 ### 2. Find all themes associated with the book "Dune"
-PREFIX ex: <http://example.org/ontology/bookrec#>
+PREFIX book: <http://www.semanticweb.org/homework/bookrec#>
 SELECT ?theme
 WHERE {
-  ex:Dune ex:hasTheme ?theme .
+  book:Dune book:hasTheme ?theme .
 }
 
-### 3. Recommendation Logic: Find books for Alice 
-### (Books that match HER preferred theme AND HER reading level)
-PREFIX ex: <http://example.org/ontology/bookrec#>
-SELECT ?recommendedBook
+### 3. Find Alice's preferred theme and reading level
+PREFIX book: <http://www.semanticweb.org/homework/bookrec#>
+SELECT ?theme ?level
 WHERE {
-  ex:Alice ex:prefersTheme ?theme .
-  ex:Alice ex:hasReadingLevel ?level .
-  ?book rdf:type ex:Book .
-  ?book ex:hasTheme ?theme .
-  ?book ex:suitableFor ?level .
-  BIND(REPLACE(STR(?book), "^.*#", "") AS ?recommendedBook)
+  book:Alice book:prefersTheme ?theme .
+  book:Alice book:hasReadingLevel ?level .
 }
 
-### 4. Find all users who prefer the "Mystery" theme
-PREFIX ex: <http://example.org/ontology/bookrec#>
-SELECT ?user
+### 4. Find all books suitable for "Intermediate" readers
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX book: <http://www.semanticweb.org/homework/bookrec#>
+SELECT ?book
 WHERE {
-  ?user ex:prefersTheme ex:Mystery .
+  ?book rdf:type book:Book .
+  ?book book:suitableFor book:Intermediate .
 }
 
-### 5. Count how many books are available for each reading level
-PREFIX ex: <http://example.org/ontology/bookrec#>
-SELECT ?level (COUNT(?book) AS ?bookCount)
+### 5. Find all books that include the "ScienceFiction" theme
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX book: <http://www.semanticweb.org/homework/bookrec#>
+SELECT ?book
 WHERE {
-  ?book ex:suitableFor ?level .
+  ?book rdf:type book:Book .
+  ?book book:hasTheme book:ScienceFiction .
 }
-GROUP BY ?level
