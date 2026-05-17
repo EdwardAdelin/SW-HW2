@@ -105,9 +105,15 @@
         </div>
 
         <!-- Task 7.2 Context-Aware Starters -->
-        <div class="starters-container">
+        <div class="starters-container" th:if="${name != null}">
+            <div class="starter-btn" th:onclick="'sendQuery(\'Tell me more about the book ' + ${name} + '\')'">About this book</div>
+            <div class="starter-btn" th:onclick="'sendQuery(\'What themes are associated with ' + ${name} + '?\')'">What's the theme?</div>
+            <div class="starter-btn" th:onclick="'sendQuery(\'Who is the intended reading level for ' + ${name} + '?\')'">Reading Level?</div>
+        </div>
+
+        <div class="starters-container" th:if="${name == null}">
+            <div class="starter-btn" onclick="sendQuery('What is a book that I am most likely to enjoy from this list?')">Recommend a book</div>
             <div class="starter-btn" onclick="sendQuery('What sci-fi books do you have?')">Sci-Fi Recommendations?</div>
-            <div class="starter-btn" onclick="sendQuery('Who is the author of Dune?')">Who wrote Dune?</div>
             <div class="starter-btn" onclick="sendQuery('What books are for Beginners?')">Beginner Books?</div>
         </div>
 
