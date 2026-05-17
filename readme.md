@@ -1,6 +1,8 @@
 # HW2 SE WEB
 
-Link to GitHub repository: https://github.com/EdwardAdelin/SW-HW2
+Link to GitHub repository: https://github.com/EdwardAdelin/SW-HW2/tree/secundar
+
+SECUNDAR branch is the final branch.
 
 
 ## TEAM MEMBERS:
