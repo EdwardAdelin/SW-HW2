@@ -1,8 +1,7 @@
 # HW2 SE WEB
 
-Link to GitHub repository: https://github.com/EdwardAdelin/SW-HW2/tree/secundar
+Link to GitHub repository: https://github.com/EdwardAdelin/SW-HW2
 
-Use the "secundar" branch for the solution of the homework.
 
 ## TEAM MEMBERS:
 - FINICHIU Eduard - Adelin (member 1)
