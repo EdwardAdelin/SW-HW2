@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Semantic Web - Project Overview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .task-card { transition: transform 0.2s; }
+        .task-card:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Semantic Web Project</h1>
+        <p class="lead text-muted">Book Recommendation System Overview</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="card task-card h-100 border-primary">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Tasks 3 & 4: Book Library</h5>
+                    <p class="card-text">View the list of all books extracted from the RDF model and access individual book details using the Apache Jena API.</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 pb-3">
+                    <a th:href="@{/}" class="btn btn-outline-primary w-100">Go to Book List</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card task-card h-100 border-success">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Task 2: Graph Visualization</h5>
+                    <p class="card-text">Interactive visual representation of the RDF graph (Alice, Bob, Books, and their relationships) using Vis.js.</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 pb-3">
+                    <a th:href="@{/visualize}" class="btn btn-outline-success w-100">View Graph</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card task-card h-100 border-warning">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">Task 6: SPARQL Queries</h5>
+                    <p class="card-text">Executed 5 complex SPARQL queries inside GraphDB using the OWL Ontology.</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 pb-3 text-center">
+                    <span class="text-muted small">See <b>sparql_owl.txt</b> and screenshots in the project archive.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 offset-lg-4 offset-md-3 mt-4">
+            <div class="card task-card h-100 border-info shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">Task 7: RAG Chatbot</h5>
+                    <p class="card-text">An AI assistant powered by Gemini and an In-Memory Vector Database, aware of all RDF context.</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 pb-3">
+                    <button onclick="toggleChat()" class="btn btn-info text-white w-100">Open Chatbot</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{chat-widget :: chat-bot}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

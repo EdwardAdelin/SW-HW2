@@ -11,5 +11,9 @@
         <a th:href="@{'/book/' + ${book}}" th:text="${book}">Book Name</a>
     </li>
 </ul>
+
+<!-- This line pulls in the fragment we created above -->
+<div th:replace="~{chat-widget :: chat-bot}"></div>
+
 </body>
 </html>
