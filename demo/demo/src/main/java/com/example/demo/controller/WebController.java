@@ -26,6 +26,12 @@ public class WebController {
         return "book-details"; // refers to book-details.html
     }
 
+    @GetMapping("/overview")
+    public String showOverview() {
+        // This tells Spring to look for "overview.html" in the templates folder
+        return "overview";
+    }
+
     // Shows the empty visualization page
     @GetMapping("/visualize")
     public String showVisualizationPage() {
