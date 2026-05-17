@@ -17,7 +17,7 @@ public class ChatController {
 
     // Keep your model configuration
     private final GoogleAiGeminiChatModel lmm = GoogleAiGeminiChatModel.builder()
-            .apiKey("replace this with your api key for google ai") // Set your API key here
+            .apiKey("asxdasdas") // Set your API key here
             .modelName("gemini-3.1-flash-lite") // Recommend using 1.5-flash instead of 3.1
             .build();
 

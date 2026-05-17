@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<body>
+
+<div th:fragment="chat-bot">
+
     <style>
         /* Floating Bubble */
         #chat-bubble {
@@ -34,7 +37,7 @@
             background: white;
             border: 1px solid #ddd;
             border-radius: 15px;
-            display: none; /* Hidden by default */
+            display: none;
             flex-direction: column;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             z-index: 9999;
@@ -86,14 +89,9 @@
         .chat-footer { padding: 10px; border-top: 1px solid #eee; }
         #chat-input { width: 100%; border-radius: 20px; border: 1px solid #ccc; padding: 8px 15px; outline: none; }
     </style>
-</head>
-<body>
 
-<div th:fragment="chat-bot">
-    <!-- The Bubble -->
     <div id="chat-bubble" onclick="toggleChat()">💬</div>
 
-    <!-- The Window -->
     <div id="chat-window">
         <div class="chat-header">
             <span>Book Rec Assistant</span>
@@ -104,11 +102,10 @@
             <div class="msg bot-msg">Hi! I've analyzed your RDF data. How can I help?</div>
         </div>
 
-        <!-- Task 7.2 Context-Aware Starters -->
         <div class="starters-container" th:if="${name != null}">
-            <div class="starter-btn" th:onclick="'sendQuery(\'Tell me more about the book ' + ${name} + '\')'">About this book</div>
-            <div class="starter-btn" th:onclick="'sendQuery(\'What themes are associated with ' + ${name} + '?\')'">What's the theme?</div>
-            <div class="starter-btn" th:onclick="'sendQuery(\'Who is the intended reading level for ' + ${name} + '?\')'">Reading Level?</div>
+            <div class="starter-btn" th:data-name="${name}" onclick="sendQuery('Tell me more about the book ' + this.getAttribute('data-name'))">About this book</div>
+            <div class="starter-btn" th:data-name="${name}" onclick="sendQuery('What themes are associated with ' + this.getAttribute('data-name') + '?')">What's the theme?</div>
+            <div class="starter-btn" th:data-name="${name}" onclick="sendQuery('Who is the intended reading level for ' + this.getAttribute('data-name') + '?')">Reading Level?</div>
         </div>
 
         <div class="starters-container" th:if="${name == null}">
